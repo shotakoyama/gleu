@@ -55,7 +55,7 @@ REF0    81.8462
 This result equals to the original GLEU+ output.
 
 ```
-$ python2 ../gec-ranking/scripts/compute_gleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
+$ python2 gec-ranking/scripts/compute_gleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
 AMU 0.583256
 CAMB 0.592553
 INPUT 0.566048
