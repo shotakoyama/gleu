@@ -32,8 +32,7 @@ However, GLEU+ in source code is:
 
 $$ p_n = \cfrac{ \displaystyle \sum_i^{|D|} \max(0,  \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) - \min(\sigma_{i, g_n}^{\mathrm{diff}}, \eta_{i, g_n})) } {\displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \eta_{i, g_n} } $$
 
-
-https://github.com/shotakoyama/gleu/blob/main/ref/gleu.py#L95-L105
+https://github.com/shotakoyama/gleu/blob/d20b995be142ff40a7e342cfe8e866a1fce09073/ref/gleu.py#L95-L105
 
 These two formulae are not equivalent because the penalty terms differ. For example, let $(\sigma, \rho, \eta) = (2, 1, 3)$, $\max(0, \min(\sigma, \eta) - \min(\rho, \eta)) = 1$, while $\min(\sigma^{\mathrm{diff}}, \eta) = 0$.
 
