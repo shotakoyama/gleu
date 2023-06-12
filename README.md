@@ -38,7 +38,7 @@ These two formulae are not equivalent because the penalty terms differ. For exam
 
 # Usage
 
-You can install the code by running `pip install -e .` under the directry with `setup.py`.
+You can install the code by running `pip install -e .` under the directry with `setup.py`. `pip install gleu` is also OK.
 
 ## corpus-level GLEU
 
