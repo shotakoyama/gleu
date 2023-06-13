@@ -1,4 +1,4 @@
-from .aggreg import make_dhrn_sent_accum, make_hdrn_sent_accum
+from .aggreg import make_dhrn_accum, make_hdrn_accum
 from .count import make_dx_xlen
 
 
@@ -26,12 +26,12 @@ def load_paired_texts(path_list):
 def load_hdrn_data(args):
     s_dat, rs_dat, hs_dat, dr_rlen, dh_hlen = load_corpora(args)
     h_dats = list(zip(*hs_dat))
-    hrnd_sacc = make_hdrn_sent_accum(args.n, s_dat, rs_dat, h_dats)
+    hrnd_sacc = make_hdrn_accum(args.n, s_dat, rs_dat, h_dats)
     return s_dat, rs_dat, hs_dat, dr_rlen, dh_hlen, hrnd_sacc
 
 
 def load_dhrn_data(args):
     s_dat, rs_dat, hs_dat, dr_rlen, dh_hlen = load_corpora(args)
-    dhrn_sacc = make_dhrn_sent_accum(args.n, s_dat, rs_dat, hs_dat)
+    dhrn_sacc = make_dhrn_accum(args.n, s_dat, rs_dat, hs_dat)
     return s_dat, rs_dat, hs_dat, dr_rlen, dh_hlen, dhrn_sacc
 

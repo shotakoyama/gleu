@@ -1,5 +1,6 @@
 import dataclasses
-from .accum import SentAccumulator
+from functools import cache
+from .accum import Accumulator
 
 
 @dataclasses.dataclass
@@ -16,8 +17,16 @@ class NgramStat:
 
     def accumlate(self):
         lst = [
-            SentAccumulator.from_count(*self[key])
+            make_accum(*self[key])
             for key
             in set(self.hyp_dict)]
-        return sum(lst, start = SentAccumulator())
+        return sum(lst, start = Accumulator())
+
+
+@cache
+def make_accum(s, r, h):
+    sdiff = (0 if r > 0 else s)
+    match = min(r, h)
+    penal = min(sdiff, h)
+    return Accumulator(match, penal, h)
 

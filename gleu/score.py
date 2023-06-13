@@ -2,42 +2,42 @@ import numpy as np
 from .util import (
         log_brevity_penalty,
         argmax)
-from .accum import DataAccumulator
-from .verbose import SentNVerbose
+from .accum import Accumulator
+from .verbose import NVerbose
 
 
-def drn_sent_accum_to_d_rmax(drn_sacc, dr_rlen, d_hlen):
-    dr_snvb = drn_sent_accum_to_dr_sent_nverbose(drn_sacc, dr_rlen, d_hlen)
-    d_rmax = [argmax(r_snvb) for r_snvb in dr_snvb]
+def drn_accum_to_d_rmax(drn_accum, dr_rlen, d_hlen):
+    dr_nvb = drn_accum_to_dr_nverbose(drn_accum, dr_rlen, d_hlen)
+    d_rmax = [argmax(r_nvb) for r_nvb in dr_nvb]
     return d_rmax
 
 
-def drn_sent_accum_to_dr_sent_nverbose(drn_sacc, drrlen, dhlen):
-    dr_snvb = [[
-        SentNVerbose(n_sacc, drrlen[d, r], dhlen[d])
-        for r, n_sacc
-        in enumerate(rn_sacc)]
-        for d, rn_sacc
-        in enumerate(drn_sacc)]
-    return dr_snvb
+def drn_accum_to_dr_nverbose(drn_accum, dr_rlen, d_hlen):
+    dr_nvb = [[
+        NVerbose(n_accum, dr_rlen[d, r], d_hlen[d])
+        for r, n_accum
+        in enumerate(rn_accum)]
+        for d, rn_accum
+        in enumerate(drn_accum)]
+    return dr_nvb
 
 
-def drn_sent_accum_to_n_data_accum(drn_sacc, d_rindex):
-    dn_sacc = [
-        rn_sacc[r]
-        for rn_sacc, r
-        in zip(drn_sacc, d_rindex)]
-    n_dacc = dn_sent_accum_to_n_data_accum(dn_sacc)
-    return n_dacc
+def drn_accum_to_n_accum(drn_accum, d_rindex):
+    dn_accum = [
+        rn_accum[r]
+        for rn_accum, r
+        in zip(drn_accum, d_rindex)]
+    n_accum = dn_accum_to_n_accum(dn_accum)
+    return n_accum
 
 
-def dn_sent_accum_to_n_data_accum(dn_sacc):
-    nd_sacc = list(zip(*dn_sacc))
-    return [d_sent_accum_to_data_accum(d_sacc) for d_sacc in nd_sacc]
+def dn_accum_to_n_accum(dn_accum):
+    nd_accum = list(zip(*dn_accum))
+    return [d_accum_to_accum(d_accum) for d_accum in nd_accum]
 
 
-def d_sent_accum_to_data_accum(d_sacc):
-    return sum([sacc.to_data_accum() for sacc in d_sacc], start = DataAccumulator())
+def d_accum_to_accum(d_accum):
+    return sum([accum.rectify() for accum in d_accum], start = Accumulator())
 
 
 def rindex_to_rhlen(dr_rlen, d_hlen, d_rindex):
@@ -46,11 +46,12 @@ def rindex_to_rhlen(dr_rlen, d_hlen, d_rindex):
     return rlen, hlen
 
 
-def rn_sent_accum_to_gleu(rn_sacc, rlens, hlen, select_max = False):
+def rn_accum_to_gleu(rn_accum, rlens, hlen, select_max = False):
     gs = [
         n_accum_to_gleu(n_accum, rlen, hlen)
         for n_accum, rlen
-        in zip(rn_sacc, rlens)]
+        in zip(rn_accum, rlens)]
+
     if select_max:
         return max(gs)
     else:
