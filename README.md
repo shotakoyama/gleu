@@ -38,7 +38,7 @@ These two formulae are not equivalent because the penalty terms differ. For exam
 
 Furthermore, the equation above equals to the next equation. In our implementation, we adopted this.
 
-$$ p_n = \cfrac{ \displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) - \sum_i^{|D|} \min( \sum_{g_n \in h_i} \min(\sigma_{i, g_n}^{\mathrm{diff}}, \rho_{i,g_n}) \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) ) } {\displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \eta_{i, g_n} } $$
+$$ p_n = \cfrac{ \displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) - \sum_i^{|D|} \min( \sum_{g_n \in h_i} \min(\sigma_{i, g_n}^{\mathrm{diff}}, \rho_{i,g_n}), \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) ) } {\displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \eta_{i, g_n} } $$
 
 # Usage
 
