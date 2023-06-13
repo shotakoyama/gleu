@@ -14,9 +14,11 @@ class NVerbose:
 
         self.matchs = [accum.match for accum in n_accum]
         self.penals = [accum.penal for accum in n_accum]
-        self.numers = [max(0, accum.match - accum.penal) for accum in n_accum]
+
+        n_accum = [accum.rectify() for accum in n_accum]
+        self.numers = [accum.match - accum.penal for accum in n_accum]
         self.denoms = [accum.denom for accum in n_accum]
-        self.ps = [accum.to_p() for accum in n_accum]
+        self.ps = [accum.p() for accum in n_accum]
 
         with np.errstate(divide = 'ignore'):
             self.logps = np.log(self.ps)

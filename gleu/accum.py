@@ -13,11 +13,12 @@ class Accumulator:
         denom = self.denom + other.denom
         return type(self)(match, penal, denom)
 
-    def to_p(self):
+    def p(self):
         if self.denom == 0:
             p = 1.0
         else:
-            numer = max(0, self.match - self.penal)
+            numer = self.match - self.penal
+            assert numer >= 0, self
             p = numer / self.denom
         return p
 

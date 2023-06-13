@@ -67,7 +67,7 @@ def n_accum_to_gleu(n_accum, rlen, hlen):
 
 
 def n_accum_to_logps(n_accum):
-    ps = [accum.to_p() for accum in n_accum]
+    ps = [accum.rectify().p() for accum in n_accum]
     with np.errstate(divide = 'ignore'):
         logps = np.log(ps)
     return logps
