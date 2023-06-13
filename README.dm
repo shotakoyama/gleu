@@ -36,6 +36,10 @@ https://github.com/shotakoyama/gleu/blob/d20b995be142ff40a7e342cfe8e866a1fce0907
 
 These two formulae are not equivalent because the penalty terms differ. For example, let $(\sigma, \rho, \eta) = (2, 1, 3)$, $\max(0, \min(\sigma, \eta) - \min(\rho, \eta)) = 1$, while $\min(\sigma^{\mathrm{diff}}, \eta) = 0$.
 
+Furthermore, the equation above equals to the next equation. In our implementation, we adopted this.
+
+$$ p_n = \cfrac{ \displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) - \sum_i^{|D|} \min( \sum_{g_n \in h_i} \min(\sigma_{i, g_n}^{\mathrm{diff}}, \rho_{i,g_n}) \sum_{g_n \in h_i} \min(\rho_{i,g_n}, \eta_{i, g_n}) ) } {\displaystyle \sum_i^{|D|} \sum_{g_n \in h_i} \eta_{i, g_n} } $$
+
 # Usage
 
 You can install the code by running `pip install -e .` under the directry with `setup.py`. `pip install gleu` is also OK.
