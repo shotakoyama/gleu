@@ -20,14 +20,14 @@ class NVerbose:
         self.denoms = [accum.denom for accum in n_accum]
         self.ps = [accum.p() for accum in n_accum]
 
+        logbp = log_brevity_penalty(rlen, hlen)
+        self.bp = np.exp(logbp)
         with np.errstate(divide = 'ignore'):
-            self.logps = np.log(self.ps)
-        self.logbp = log_brevity_penalty(rlen, hlen)
-        self.bp = np.exp(self.logbp)
-        self.gleus = np.exp(self.logbp + self.logps)
-        self.loggmeanp = self.logps.mean()
-        self.p = np.exp(self.loggmeanp)
-        self.gleu = np.exp(self.logbp + self.loggmeanp)
+            logps = np.log(self.ps)
+        loggmeanp = logps.mean()
+        self.p = np.exp(loggmeanp)
+        self.gleus = np.exp(logbp + logps)
+        self.gleu = np.exp(logbp + loggmeanp)
 
     def iter_row(self, digit):
         for n in range(self.n):
