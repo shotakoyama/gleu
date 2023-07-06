@@ -7,7 +7,7 @@ with open('README.md') as f:
 
 setuptools.setup(
         name = 'gleu',
-        version = '1.0.0',
+        version = '1.1.0',
         author = 'Shota Koyama',
         author_email = 'koyamashota0@gmail.com',
         description = 'GLEU: evaluation metric for grammatical error correction',
@@ -20,5 +20,9 @@ setuptools.setup(
             'Operating System :: OS Independent'],
         packages = setuptools.find_packages(),
         install_requires = ['numpy', 'prettytable'],
-        entry_points = {'console_scripts':['gleu = gleu.main:main']})
+        entry_points = {
+            'console_scripts':[
+                'gleu = gleu.main:gleu',
+                'sgleu = gleu.main:sgleu',
+                'mgleu = gleu.main:mgleu']})
 

@@ -4,25 +4,25 @@ from .corpus_main import corpus_main
 from .count import set_tokenization
 
 
-def main():
-    args = parse_args()
-    set_tokenization(args.token)
-    args.handler(args)
+def gleu():
+    main(corpus_main)
 
 
-def parse_args():
+def sgleu():
+    main(sent_main)
+
+
+def mgleu():
+    main(mean_main)
+
+
+def main(handler):
     parser = ArgumentParser()
-    first = parser.add_subparsers()
-    set_method(first, 'sent', sent_main)
-    set_method(first, 'mean', mean_main)
-    set_method(first, 'corpus', corpus_main)
-    return parser.parse_args()
-
-
-def set_method(first, arg, handler):
-    parser = first.add_parser(arg)
     add_args(parser)
     parser.set_defaults(handler = handler)
+    args = parser.parse_args()
+    set_tokenization(args.token)
+    args.handler(args)
 
 
 def add_args(parser):

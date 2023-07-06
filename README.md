@@ -49,7 +49,7 @@ You can install the code by running `pip install -e .` under the directry with `
 Run the code below to get the same result as the original implementation. `-d` or `--digit` specifies the number of digits of decimal places. `-f` or `--fix-seed` is required to reproduce the original result.
 
 ```
-$ gleu corpus -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -d 4 -f
+$ gleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -d 4 -f
 AMU     58.3256
 CAMB    59.2553
 INPUT   56.6048
@@ -69,7 +69,7 @@ REF0 0.818462
 `-p` is the number of process (default: 1). In my environment, `-p 8` is the fastest. `-n` is the number of the max size of n-gram (default: 4). `-i` is the number of iterations of reference sampling. `-t` specifies tokenization method (choices: `word` or `char`, default: `word`).
 
 ```
-$ gleu corpus -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -p 8 -n 6 -i 1000 -t char
+$ gleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -p 8 -n 6 -i 1000 -t char
 AMU     83.06
 CAMB    83.41
 INPUT   83.30
@@ -79,13 +79,13 @@ REF0    92.22
 Although default mode samples from multiple refereces, max mode (`-m`) uses the best reference for each sentence.
 
 ```
-$ gleu corpus -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -p 8 -m
+$ gleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -p 8 -m
 AMU     68.81
 CAMB    68.55
 INPUT   68.34
 REF0    100.00
 
-$ gleu corpus -s INPUT -r REF0 REF1 -o AMU CAMB -p 8 -mv
+$ gleu -s INPUT -r REF0 REF1 -o AMU CAMB -p 8 -mv
 AMU
 +-------+-------+--------+-------+--------+-------+
 |       | numer | denom  |   p   |   bp   |  gleu |
@@ -111,7 +111,7 @@ CAMB
 ## sentence-level GLEU
 
 ```
-$ gleu sent -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
+$ sgleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
 100.00  100.00  100.00  100.00
 100.00  0.00    100.00  100.00
 53.34   0.00    53.34   100.00
@@ -126,7 +126,7 @@ $ gleu sent -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
 ```
 
 ```
-$ gleu sent -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -m
+$ sgleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -m
 100.00  100.00  100.00  100.00
 100.00  0.00    100.00  100.00
 53.34   0.00    53.34   100.00
@@ -140,7 +140,7 @@ $ gleu sent -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -m
 ```
 
 ```
-$ gleu sent -s INPUT -r REF0 REF1 -o AMU -v
+$ sgleu -s INPUT -r REF0 REF1 -o AMU -v
 S-1     Keeping the Secret of Genetic Testing
 H-1-1   Keeping the Secret of Genetic Testing
 R-1-1*  Keeping the Secret of Genetic Testing
@@ -169,13 +169,13 @@ R-1-2   Keeping the Secret of Genetic Testing
 ```
 
 ```
- $ gleu mean -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
+ $ mgleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0
 AMU     54.12
 CAMB    54.33
 INPUT   50.67
 REF0    79.63
 
-$ gleu mean -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -m
+$ mgleu -s INPUT -r REF0 REF1 -o AMU CAMB INPUT REF0 -m
 AMU     66.70
 CAMB    65.55
 INPUT   64.53
